@@ -1,3 +1,7 @@
 # For more information on using i18n see: https://github.com/nicksnyder/go-i18n
-- id: welcome_greeting
-  translation: "Willkomen in Buffalo (DE)"
+- id: simple_expenses_app
+  translation: "Einfache Ausgaben App"
+- id: register_unlimited_accounts
+  translation: "Registrieren und unbegrenzte Konten erstellen."
+- id: track_incomes_and_expenses
+  translation: "Verfolgen Sie Ihre Einnahmen und Ausgaben."

@@ -1,3 +1,7 @@
 # For more information on using i18n see: https://github.com/nicksnyder/go-i18n
-- id: welcome_greeting
-  translation: "Dobrodošli u Buffalo (SR)"
+- id: simple_expenses_app
+  translation: "Jednostavna aplikacija za evidenciju troškova"
+- id: register_unlimited_accounts
+  translation: "Registrujte se i vodite neograničen broj računa."
+- id: track_incomes_and_expenses
+  translation: "Pratite vaše prihode i rashode."
