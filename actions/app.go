@@ -71,6 +71,7 @@ func App() *buffalo.App {
 		app.Middleware.Skip(Authorize, HomeHandler, UsersNew, UsersCreate, AuthNew, AuthCreate, LanguagesChange)
 
 		app.Resource("/expenses", ExpensesResource{})
+		app.Resource("/incomes", IncomesResource{})
 		app.ServeFiles("/", assetsBox) // serve files from the public directory
 	}
 

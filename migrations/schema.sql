@@ -52,6 +52,24 @@ CREATE TABLE public.expenses (
 ALTER TABLE public.expenses OWNER TO postgres;
 
 --
+-- Name: incomes; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.incomes (
+    id uuid NOT NULL,
+    description character varying(255) NOT NULL,
+    amount numeric,
+    exchange numeric,
+    account_id integer,
+    deleted boolean,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE public.incomes OWNER TO postgres;
+
+--
 -- Name: schema_migration; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -83,6 +101,14 @@ ALTER TABLE public.users OWNER TO postgres;
 
 ALTER TABLE ONLY public.expenses
     ADD CONSTRAINT expenses_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: incomes incomes_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.incomes
+    ADD CONSTRAINT incomes_pkey PRIMARY KEY (id);
 
 
 --
