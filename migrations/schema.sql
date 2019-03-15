@@ -34,6 +34,21 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
+-- Name: accounts; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.accounts (
+    id uuid NOT NULL,
+    description character varying(255) NOT NULL,
+    deleted_at timestamp without time zone,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE public.accounts OWNER TO postgres;
+
+--
 -- Name: expenses; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -94,6 +109,14 @@ CREATE TABLE public.users (
 
 
 ALTER TABLE public.users OWNER TO postgres;
+
+--
+-- Name: accounts accounts_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.accounts
+    ADD CONSTRAINT accounts_pkey PRIMARY KEY (id);
+
 
 --
 -- Name: expenses expenses_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres

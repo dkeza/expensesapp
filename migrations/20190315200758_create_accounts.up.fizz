@@ -1,0 +1,5 @@
+create_table("accounts") {
+	t.Column("id", "uuid", {primary: true})
+	t.Column("description", "string", {})
+	t.Column("deleted_at", "timestamp", {null: true})
+}
