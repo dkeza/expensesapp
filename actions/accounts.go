@@ -4,6 +4,7 @@ import (
 	"github.com/dkeza/expensesapp/models"
 	"github.com/gobuffalo/buffalo"
 	"github.com/gobuffalo/pop"
+	"github.com/gofrs/uuid"
 	"github.com/pkg/errors"
 )
 
@@ -40,7 +41,8 @@ func (v AccountsResource) List(c buffalo.Context) error {
 	q := tx.PaginateFromParams(c.Params())
 
 	// Retrieve all Accounts from the DB
-	if err := q.All(accounts); err != nil {
+	userid := c.Session().Get("current_user_id")
+	if err := q.Where("user_id = ?", userid).All(accounts); err != nil {
 		return errors.WithStack(err)
 	}
 
@@ -86,6 +88,9 @@ func (v AccountsResource) Create(c buffalo.Context) error {
 	if err := c.Bind(account); err != nil {
 		return errors.WithStack(err)
 	}
+
+	// Link account with currently logged user
+	account.UserID = interface{}(c.Session().Get("current_user_id")).(uuid.UUID)
 
 	// Get the DB connection from the context
 	tx, ok := c.Value("tx").(*pop.Connection)

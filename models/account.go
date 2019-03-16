@@ -17,6 +17,7 @@ type Account struct {
 	UpdatedAt   time.Time  `json:"updated_at" db:"updated_at"`
 	Description string     `json:"description" db:"description"`
 	DeletedAt   nulls.Time `json:"deleted_at" db:"deleted_at"`
+	UserID      uuid.UUID  `json:"user_id" db:"user_id"`
 }
 
 // String is not required by pop and may be deleted
