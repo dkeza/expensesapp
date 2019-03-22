@@ -113,6 +113,21 @@ func (v AccountsResource) Create(c buffalo.Context) error {
 		return c.Render(422, r.Auto(c, account))
 	}
 
+	if uid := c.Session().Get("current_user_id"); uid != nil {
+		u := &models.User{}
+		err = tx.Find(u, uid)
+		if err != nil {
+			return errors.WithStack(err)
+		}
+		if account.Selected {
+			u.AccountID = account.ID
+			verrs, err = tx.ValidateAndUpdate(u)
+			if err != nil {
+				return errors.WithStack(err)
+			}
+		}
+	}
+
 	// If there are no errors set a success message
 	c.Flash().Add("success", T.Translate(c, "account.created.success"))
 	// and redirect to the accounts index page
@@ -171,6 +186,22 @@ func (v AccountsResource) Update(c buffalo.Context) error {
 		// Render again the edit.html template that the user can
 		// correct the input.
 		return c.Render(422, r.Auto(c, account))
+	}
+
+	if uid := c.Session().Get("current_user_id"); uid != nil {
+		u := &models.User{}
+		err = tx.Find(u, uid)
+		if err != nil {
+			return errors.WithStack(err)
+		}
+		if account.Selected {
+			u.AccountID = account.ID
+			verrs, err = tx.ValidateAndUpdate(u)
+			if err != nil {
+				return errors.WithStack(err)
+			}
+
+		}
 	}
 
 	// If there are no errors set a success message

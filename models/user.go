@@ -20,6 +20,7 @@ type User struct {
 	UpdatedAt    time.Time `json:"updated_at" db:"updated_at"`
 	Email        string    `json:"email" db:"email"`
 	PasswordHash string    `json:"password_hash" db:"password_hash"`
+	AccountID    uuid.UUID `json:"account_id" db:"account_id"`
 
 	Password             string `json:"-" db:"-"`
 	PasswordConfirmation string `json:"-" db:"-"`

@@ -4,18 +4,21 @@
 <ul class="list-unstyled list-inline">
   <li><a href="<%= newAccountsPath() %>" class="btn btn-primary">Create New Account</a></li>
 </ul>
-
 <table class="table table-striped">
   <thead>
   <th>Description</th>
-    <th>DeletedAt</th>
+    <th>Selected</th>
     <th>&nbsp;</th>
   </thead>
   <tbody>
     <%= for (account) in accounts { %>
       <tr>
       <td><%= account.Description %></td>
-        <td><%= account.DeletedAt %></td>
+        <td>
+          <%= if (account.ID.String() == current_user.AccountID.String()) { %>
+            Yes
+          <% } %>
+        </td>
         <td>
           <div class="pull-right">
             <a href="<%= accountPath({ account_id: account.ID }) %>" class="btn btn-info">View</a>

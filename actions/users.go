@@ -21,6 +21,13 @@ func UsersCreate(c buffalo.Context) error {
 	}
 
 	tx := c.Value("tx").(*pop.Connection)
+	// a := &models.Account{}
+	// a.Description = "Default"
+	// verrs, err := a.Create(tx)
+	// if err != nil {
+	// 	return errors.WithStack(err)
+	// }
+
 	verrs, err := u.Create(tx)
 	if err != nil {
 		return errors.WithStack(err)
@@ -50,6 +57,13 @@ func SetCurrentUser(next buffalo.Handler) buffalo.Handler {
 				return errors.WithStack(err)
 			}
 			c.Set("current_user", u)
+
+			a := &models.Account{}
+			err = tx.Find(a, u.AccountID)
+			if err != nil {
+				//return errors.WithStack(err)
+			}
+			c.Set("current_account", a)
 		}
 		return next(c)
 	}
