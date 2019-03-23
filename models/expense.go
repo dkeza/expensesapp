@@ -18,7 +18,7 @@ type Expense struct {
 	Description string        `json:"description" db:"description"`
 	Amount      nulls.Float64 `json:"amount" db:"amount"`
 	Exchange    nulls.Float64 `json:"exchange" db:"exchange"`
-	AccountID   nulls.Int     `json:"account_id" db:"account_id"`
+	AccountID   uuid.UUID     `json:"account_id" db:"account_id"`
 	Deleted     nulls.Bool    `json:"deleted" db:"deleted"`
 }
 

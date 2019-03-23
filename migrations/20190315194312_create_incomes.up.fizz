@@ -3,6 +3,6 @@ create_table("incomes") {
 	t.Column("description", "string", {})
 	t.Column("amount", "float", {null: true})
 	t.Column("exchange", "float", {null: true})
-	t.Column("account_id", "integer", {null: true})
+	t.Column("account_id", "uuid", {null: false})
 	t.Column("deleted", "bool", {null: true})
 }

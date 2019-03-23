@@ -58,7 +58,7 @@ CREATE TABLE public.expenses (
     description character varying(255) NOT NULL,
     amount numeric,
     exchange numeric,
-    account_id integer,
+    account_id uuid,
     deleted boolean,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
@@ -76,7 +76,7 @@ CREATE TABLE public.incomes (
     description character varying(255) NOT NULL,
     amount numeric,
     exchange numeric,
-    account_id integer,
+    account_id uuid,
     deleted boolean,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL

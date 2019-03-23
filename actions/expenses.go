@@ -33,6 +33,14 @@ func (v ExpensesResource) List(c buffalo.Context) error {
 		return errors.WithStack(errors.New("no transaction found"))
 	}
 
+	u := &models.User{}
+	if uid := c.Session().Get("current_user_id"); uid != nil {
+		err := tx.Find(u, uid)
+		if err != nil {
+			return errors.WithStack(err)
+		}
+	}
+
 	expenses := &models.Expenses{}
 
 	// Paginate results. Params "page" and "per_page" control pagination.
@@ -40,7 +48,7 @@ func (v ExpensesResource) List(c buffalo.Context) error {
 	q := tx.PaginateFromParams(c.Params())
 
 	// Retrieve all Expenses from the DB
-	if err := q.All(expenses); err != nil {
+	if err := q.Where("account_id = ?", u.AccountID).All(expenses); err != nil {
 		return errors.WithStack(err)
 	}
 
@@ -91,6 +99,15 @@ func (v ExpensesResource) Create(c buffalo.Context) error {
 	tx, ok := c.Value("tx").(*pop.Connection)
 	if !ok {
 		return errors.WithStack(errors.New("no transaction found"))
+	}
+
+	if uid := c.Session().Get("current_user_id"); uid != nil {
+		u := &models.User{}
+		err := tx.Find(u, uid)
+		if err != nil {
+			return errors.WithStack(err)
+		}
+		expense.AccountID = u.AccountID
 	}
 
 	// Validate the data from the html form
