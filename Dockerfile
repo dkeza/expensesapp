@@ -32,7 +32,7 @@ ENV ADDR=0.0.0.0
 EXPOSE 3000
 
 # Uncomment to run the migrations before running the binary:
-CMD /bin/app migrate; /bin/app
+CMD /bin/app pop reset; /bin/app
 CMD exec /bin/app
 
 
