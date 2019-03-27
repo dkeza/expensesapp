@@ -1,9 +1,9 @@
 # This is a multi-stage Dockerfile and requires >= Docker 17.05
 # https://docs.docker.com/engine/userguide/eng-image/multistage-build/
-FROM gobuffalo/buffalo:v0.14.0 as builder
+FROM gobuffalo/buffalo:v0.14.2 as builder
 
-RUN mkdir -p $GOPATH/src/github.com/dkeza/expensesapp
-WORKDIR $GOPATH/src/github.com/dkeza/expensesapp
+RUN mkdir -p $GOPATH/src/coke3
+WORKDIR $GOPATH/src/coke3
 
 # this will cache the npm install step, unless package.json changes
 ADD package.json .
@@ -14,7 +14,6 @@ RUN go get $(go list ./... | grep -v /vendor/)
 RUN buffalo build --static -o /bin/app
 
 FROM alpine
-RUN apk add --no-cache curl
 RUN apk add --no-cache bash
 RUN apk add --no-cache ca-certificates
 
@@ -33,5 +32,3 @@ EXPOSE 3000
 # Uncomment to run the migrations before running the binary:
 CMD /bin/app migrate; /bin/app
 # CMD exec /bin/app
-
-
