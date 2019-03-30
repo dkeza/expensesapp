@@ -1,0 +1,4 @@
+create_table("params") {
+	t.Column("id", "uuid", {primary: true})
+	t.Column("exchange_eur", "decimal", {})
+}

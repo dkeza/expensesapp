@@ -1,0 +1,6 @@
+- id: "param.created.success"
+  translation: "Param was successfully created."
+- id: "param.updated.success"
+  translation: "Param was successfully updated."
+- id: "param.destroyed.success"
+  translation: "Param was successfully destroyed."

@@ -1,0 +1,31 @@
+<div class="page-header">
+  <h1>Params</h1>
+</div>
+<ul class="list-unstyled list-inline">
+  <li><a href="<%= newParamsPath() %>" class="btn btn-primary">Create New Param</a></li>
+</ul>
+
+<table class="table table-striped">
+  <thead>
+  <th>ExchangeEur</th>
+    <th>&nbsp;</th>
+  </thead>
+  <tbody>
+    <%= for (param) in params { %>
+      <tr>
+      <td><%= param.ExchangeEur %></td>
+        <td>
+          <div class="pull-right">
+            <a href="<%= paramPath({ param_id: param.ID }) %>" class="btn btn-info">View</a>
+            <a href="<%= editParamPath({ param_id: param.ID }) %>" class="btn btn-warning">Edit</a>
+            <a href="<%= paramPath({ param_id: param.ID }) %>" data-method="DELETE" data-confirm="Are you sure?" class="btn btn-danger">Destroy</a>
+          </div>
+        </td>
+      </tr>
+    <% } %>
+  </tbody>
+</table>
+
+<div class="text-center">
+  <%= paginator(pagination) %>
+</div>

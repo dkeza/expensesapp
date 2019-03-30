@@ -1,0 +1,13 @@
+<div class="page-header">
+  <h1>Param#Show</h1>
+</div>
+
+<ul class="list-unstyled list-inline">
+  <li class="list-inline-item"><a href="<%= paramsPath() %>" class="btn btn-info">Back to all Params</a></li>
+  <li class="list-inline-item"><a href="<%= editParamPath({ param_id: param.ID })%>" class="btn btn-warning">Edit</a></li>
+  <li class="list-inline-item"><a href="<%= paramPath({ param_id: param.ID })%>" data-method="DELETE" data-confirm="Are you sure?" class="btn btn-danger">Destroy</a>
+</ul>
+
+<p>
+  <strong>ExchangeEur</strong>: <%= param.ExchangeEur %>
+</p>

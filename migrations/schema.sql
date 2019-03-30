@@ -86,6 +86,20 @@ CREATE TABLE public.incomes (
 ALTER TABLE public.incomes OWNER TO postgres;
 
 --
+-- Name: params; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.params (
+    id uuid NOT NULL,
+    exchange_eur numeric NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE public.params OWNER TO postgres;
+
+--
 -- Name: schema_migration; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -134,6 +148,14 @@ ALTER TABLE ONLY public.expenses
 
 ALTER TABLE ONLY public.incomes
     ADD CONSTRAINT incomes_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: params params_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.params
+    ADD CONSTRAINT params_pkey PRIMARY KEY (id);
 
 
 --
