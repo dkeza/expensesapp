@@ -100,6 +100,26 @@ CREATE TABLE public.params (
 ALTER TABLE public.params OWNER TO postgres;
 
 --
+-- Name: posts; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.posts (
+    id uuid NOT NULL,
+    description character varying(255) NOT NULL,
+    expenses_id uuid,
+    incomes_id uuid,
+    accounts_id uuid NOT NULL,
+    amount numeric NOT NULL,
+    exchange numeric NOT NULL,
+    deleted boolean NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE public.posts OWNER TO postgres;
+
+--
 -- Name: schema_migration; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -156,6 +176,14 @@ ALTER TABLE ONLY public.incomes
 
 ALTER TABLE ONLY public.params
     ADD CONSTRAINT params_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: posts posts_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.posts
+    ADD CONSTRAINT posts_pkey PRIMARY KEY (id);
 
 
 --

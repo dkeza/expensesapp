@@ -1,0 +1,10 @@
+create_table("posts") {
+	t.Column("id", "uuid", {primary: true})
+	t.Column("description", "string", {})
+	t.Column("expenses_id", "uuid", {})
+	t.Column("incomes_id", "uuid", {})
+	t.Column("accounts_id", "uuid", {})
+	t.Column("amount", "decimal", {})
+	t.Column("exchange", "decimal", {})
+	t.Column("deleted", "bool", {})
+}
