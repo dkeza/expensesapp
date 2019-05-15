@@ -33,6 +33,14 @@ func (v PostsResource) List(c buffalo.Context) error {
 		return errors.WithStack(errors.New("no transaction found"))
 	}
 
+	u := &models.User{}
+	if uid := c.Session().Get("current_user_id"); uid != nil {
+		err := tx.Find(u, uid)
+		if err != nil {
+			return errors.WithStack(err)
+		}
+	}
+
 	posts := &models.Posts{}
 
 	// Paginate results. Params "page" and "per_page" control pagination.
@@ -40,7 +48,7 @@ func (v PostsResource) List(c buffalo.Context) error {
 	q := tx.PaginateFromParams(c.Params())
 
 	// Retrieve all Posts from the DB
-	if err := q.All(posts); err != nil {
+	if err := q.Where("accounts_id = ?", u.AccountID).All(posts); err != nil {
 		return errors.WithStack(err)
 	}
 
@@ -91,6 +99,15 @@ func (v PostsResource) Create(c buffalo.Context) error {
 	tx, ok := c.Value("tx").(*pop.Connection)
 	if !ok {
 		return errors.WithStack(errors.New("no transaction found"))
+	}
+
+	if uid := c.Session().Get("current_user_id"); uid != nil {
+		u := &models.User{}
+		err := tx.Find(u, uid)
+		if err != nil {
+			return errors.WithStack(err)
+		}
+		post.AccountsID = u.AccountID
 	}
 
 	// Validate the data from the html form
