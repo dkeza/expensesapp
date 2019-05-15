@@ -22,7 +22,7 @@
         <td><%= post.ExpensesID %></td>
         <td><%= post.IncomesID %></td>
         <td><%= post.Amount %></td>
-        <td><%= post.Exchange %></td>
+        <td><%= showeur(post.Amount, post.Exchange) %>€</td>
         <td><%= post.Deleted %></td>
         <td>
           <div class="pull-right">

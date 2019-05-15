@@ -1,6 +1,8 @@
 package actions
 
 import (
+	"fmt"
+
 	"github.com/dkeza/expensesapp/models"
 	"github.com/gobuffalo/buffalo"
 	"github.com/gobuffalo/pop"
@@ -54,6 +56,14 @@ func (v PostsResource) List(c buffalo.Context) error {
 
 	// Add the paginator to the context so it can be used in the template.
 	c.Set("pagination", q.Paginator)
+
+	c.Set("showeur", func(dom, eur float64) string {
+		calcValue := 0.00
+		if eur > 0 {
+			calcValue = dom / eur
+		}
+		return fmt.Sprintf("%.2f", calcValue)
+	})
 
 	return c.Render(200, r.Auto(c, posts))
 }
