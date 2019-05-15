@@ -110,6 +110,14 @@ func (v PostsResource) Create(c buffalo.Context) error {
 		post.AccountsID = u.AccountID
 	}
 
+	// Get current exchange rate and store it in new post
+	param := &models.Param{}
+	q := tx.RawQuery("SELECT * FROM params WHERE 1=1")
+	if err := q.First(param); err != nil {
+		return errors.WithStack(err)
+	}
+	post.Exchange = param.ExchangeEur
+
 	// Validate the data from the html form
 	verrs, err := tx.ValidateAndCreate(post)
 	if err != nil {
